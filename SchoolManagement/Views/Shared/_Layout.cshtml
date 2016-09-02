@@ -1,0 +1,115 @@
+﻿@using SchoolManagement.Resources
+@{
+    var routeData = ViewContext.RouteData.Values;
+
+    var englishRouteData = new RouteValueDictionary(routeData);
+    englishRouteData["lang"] = "en";
+
+    var arabicRouteData = new RouteValueDictionary(routeData);
+    arabicRouteData["lang"] = "ar";
+
+    var language = (string)routeData["lang"];
+}
+<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.6.616/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.6.616/styles/kendo.default.min.css" />
+<script src="http://kendo.cdn.telerik.com/2016.6.616/js/kendo.all.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2016.6.616/js/kendo.timezones.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2016.6.616/js/kendo.aspnetmvc.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - @General.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Content/kendo/css")*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/kendo")*@
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    @if (language == "ar")
+    {
+        <link href="~/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap-rtl.css" rel="stylesheet" type="text/css" />
+    }
+    else
+    {
+        <link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    }
+    <link href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+    <link href="~/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE STYLES -->
+    @RenderSection("Styles", false)
+    <!-- END PAGE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    @if (language == "ar")
+    {
+        <link href="~/css/components-rtl.css" id="style_components" rel="stylesheet" type="text/css" />
+        <link href="~/css/plugins-rtl.css" rel="stylesheet" type="text/css" />
+        <link href="~/css/layout-rtl.css" rel="stylesheet" type="text/css" />
+        <link href="~/css/themes/ifresh-rtl.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="~/css/custom-rtl.css" rel="stylesheet" type="text/css" />
+    }
+    else
+    {
+        <link href="~/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+        <link href="~/css/plugins.css" rel="stylesheet" type="text/css" />
+        <link href="~/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="~/css/themes/ifresh.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="~/css/custom.css" rel="stylesheet" type="text/css" />
+    }
+    <!-- END THEME STYLES -->
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    
+                    <li>@Html.ActionLink(General.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.RouteLink("English", englishRouteData)</li>
+                    <li>@Html.RouteLink("العربية", arabicRouteData)</li>
+                </ul>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (User.IsInRole("AccessRole"))
+{
+    <a href='@Url.Action("Index", "AccessRole")'>
+        <img src='@Url.Content("~/Content/Images/1.jpg")' />
+    </a>
+}
+else
+{
+    <a href='@Url.Action("Index", "Denied")'>
+        <img src='@Url.Content("~/Content/Images/2.jpg")' />
+    </a>
+}
+
