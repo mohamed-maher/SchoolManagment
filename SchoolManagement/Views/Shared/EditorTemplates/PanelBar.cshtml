@@ -1,36 +1,4 @@
-﻿@using Kendo.Mvc.UI
-@using System.Web.Helpers
-
-@model DateTime?
-@{
-    ViewBag.Title = "Index";
-}
-
-@*@(Html.Kendo().DatePickerFor(m => m))*@
-@*@if (User.IsInRole("AccessRole"))
-{
-    <a href='@Url.Action("Index", "AccessRole")'>
-        <img src='@Url.Content("~/Content/Images/1.jpg")' />
-    </a>
-}
-else
-{
-    <a href='@Url.Action("Index", "Denied")'>
-        <img src='@Url.Content("~/Content/Images/2.jpg")' />
-    </a>
-}*@
-@(Html.Kendo().DatePicker()
-              .Name("datepicker")
-              .Value("10/10/2011")
-              .HtmlAttributes(new { style = "width: 100%" })
-)
-@Html.Kendo().AutoComplete().Name("KAutoComplete").Placeholder("....")
-
-@Html.Kendo().Calendar().Name("KCal").Value(DateTime.Now)
-
-@Html.Kendo().ListView("").Name("KListView").TagName("div").BindTo(Model).ClientAltTemplateId("emp_templete")
-
-@(Html.Kendo().PanelBar()
+﻿@(Html.Kendo().PanelBar()
     .Name("IntroPanelBar")
     .Items(items =>
     {

@@ -14,7 +14,7 @@ namespace SchoolManagement.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            return View("Index", "_Layout");
+            return View();
         }
 
         [HttpPost]

@@ -1,0 +1,19 @@
+﻿@Html.Kendo().Grid<tmodel>().Name("KGrid").Columns(column => {column.Bound(model => model.ID).Format("{0:c}");
+                                                             column.Bound(model => model.Name).ClientTemplete("#: model.Name #").Title("Name");
+                                                             column.Command(command => {command.Edit();
+                                                                                        command.Destory();
+                                                        })})
+                                          .Editable(ed => ed.Mode(GridEditMode.PopUp))
+                                          .Groupable()
+                                          .Filterable()
+                                          .Pageable()
+                                          .Sortable()
+                                          .ToolBar(t => t.Create())
+                                          .DataSource(datasource => datasource.Ajax()
+                                                                              .PageSize(10)
+                                                                              .Model(model => model.Id(s => s.SupplierID))
+                                                                              .Read(read => read.Action("action", "Controller"))
+                                                                              .Create(create => create.Action("action", "Controller"))
+                                                                              .Update(update => update.Action("action", "Controller"))
+                                                                              .Destroy(delete => delete.Action("action", "Controller"))
+    )

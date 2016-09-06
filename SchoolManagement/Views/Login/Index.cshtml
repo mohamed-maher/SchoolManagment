@@ -1,21 +1,23 @@
 ﻿@using SchoolManagement.Resources;
+@using Kendo.Mvc.UI
 @model SchoolManagement.Models.tUser
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-    {
-        <div>
-            @Html.Label(General.UserName)
-            @Html.TextBoxFor(model => model.UserName, new { id = "username" })
-        </div>
-        <div>
-            @Html.Label(General.Password)
-            @Html.PasswordFor(model => model.Password, new { id = "password" })
-        </div>
-        <div>
-            <input type="submit" value="@General.Login"/>
-        </div>
-    }
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    <div>
+        @Html.Label(General.UserName)
+        @Html.TextBoxFor(model => model.UserName, new { id = "username" })
+    </div>
+    <div>
+        @Html.Label(General.Password)
+        @Html.PasswordFor(model => model.Password, new { id = "password" })
+    </div>
+    <div>
+        <input type="submit" value="@General.Login"/>
+    </div>
+}

@@ -1,0 +1,15 @@
+﻿@(Html.Kendo().TreeView()
+        .Name("LinksTreeView")
+        .Items(items =>
+        {
+            items.Add()
+                .Text("Home")
+                .Action("Index", "Home");
+            items.Add()
+                .Text("About")
+                .Action("About", "Home");
+            items.Add()
+                .Text("Contact")
+                .Action("Contact", "Home");
+        })
+)
