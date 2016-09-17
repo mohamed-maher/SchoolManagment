@@ -14,7 +14,6 @@ namespace SchoolManagement.Models
     
     public partial class tUser
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tUser()
         {
             this.tUserAccessRoles = new HashSet<tUserAccessRole>();
@@ -26,7 +25,6 @@ namespace SchoolManagement.Models
         public int EmployeeID { get; set; }
     
         public virtual tEmployee tEmployee { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tUserAccessRole> tUserAccessRoles { get; set; }
     }
 }

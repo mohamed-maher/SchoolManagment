@@ -12,16 +12,13 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tModule
+    public partial class AspNetUserClaim
     {
-        public tModule()
-        {
-            this.tAccessRoleDets = new HashSet<tAccessRoleDet>();
-        }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public int ModuleID { get; set; }
-        public string ModuleName { get; set; }
-    
-        public virtual ICollection<tAccessRoleDet> tAccessRoleDets { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

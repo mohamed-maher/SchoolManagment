@@ -10,7 +10,9 @@ namespace SchoolManagement.Infrastructure
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class CustomAuthorizeAttribute : AuthorizeAttribute
-    {
+    {   
+        
+
         SecurityEntities db = new SecurityEntities();
         //public CustomAuthorizeAttribute(string roleSelector)
         //{

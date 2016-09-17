@@ -14,7 +14,6 @@ namespace SchoolManagement.Models
     
     public partial class tEmployee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tEmployee()
         {
             this.tUsers = new HashSet<tUser>();
@@ -24,7 +23,6 @@ namespace SchoolManagement.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tUser> tUsers { get; set; }
     }
 }

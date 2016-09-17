@@ -12,16 +12,11 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tModule
+    public partial class C__MigrationHistory
     {
-        public tModule()
-        {
-            this.tAccessRoleDets = new HashSet<tAccessRoleDet>();
-        }
-    
-        public int ModuleID { get; set; }
-        public string ModuleName { get; set; }
-    
-        public virtual ICollection<tAccessRoleDet> tAccessRoleDets { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }
