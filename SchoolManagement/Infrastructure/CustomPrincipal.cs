@@ -12,23 +12,23 @@ namespace System.Web.Mvc
 {
     public class CustomPrincipal : IPrincipal
     {
-        SecurityEntities db = new SecurityEntities();
-        private tUser User;
+        SMSEntities db = new SMSEntities();
+        private User User;
         public CustomPrincipal(string username)
         {
-            this.User = db.tUsers.Single(u => u.UserName == username);
+            this.User = db.Users.Single(u => u.UserName == username);
             this.Identity = new GenericIdentity(username);
         }
         public IIdentity Identity { get; set; }
 
         public bool IsInRole(string role)
         {
-            var accessrole = (from ac in db.tAccessRoles
-                              join userac in db.tUserAccessRoles on ac.AccessRoleID equals userac.AccessRoleID
-                              where userac.UserID == SessionPersister.User.UserID
+            var accessrole = (from ac in db.AccessRoles
+                              from userac in db.UserAccessRoles
+                              where userac.User == SessionPersister.User
                               select new
                               {
-                                  AccessRoleName = ac.AccessRoleName
+                                  AccessRoleName = ac.AccessRoleName_en
                               });
             List<string> accessrolename = new List<string>();
             foreach (var ac in accessrole)

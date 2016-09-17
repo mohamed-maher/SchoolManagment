@@ -14,29 +14,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .k-pdf-export .k-grid-toolbar,
+        .k-pdf-export .k-pager-wrap {
+            display: none;
+        }
+    </style>
+    <link href="~/css/grid.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <title>@ViewBag.Title - @General.Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    @*<meta content="width=device-width, initial-scale=1" name="viewport" />*@
     <meta content="" name="description" />
     <meta content="" name="author" />
+    @*<title>@ViewBag.Title - My Telerik MVC Application</title>*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*@Styles.Render("~/Content/kendo/css")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/kendo")*@
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <script src="@Url.Content("~/Scripts/pako.min.js")"></script>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.2.714/kendo.common.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.2.714/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.2.714/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.2.714/kendo.default.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.2.714/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/kendo/2016.2.714/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/kendo/2016.2.714/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo/2016.2.714/angular.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2016.2.714/jszip.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2016.2.714/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.2.714/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
     <link href="~/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="~/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
@@ -277,14 +282,14 @@
         </div>
         <!-- END CONTENT -->
         <!-- BEGIN MODAL -->
-        <div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        @*<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="modalContent">
                 </div>
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
-        </div>
+        </div>*@
         <!-- /.modal -->
         <!-- END MODAL -->
     </div>
@@ -330,7 +335,7 @@
     @*@RenderSection("Scripts", required: false)*@
     @*@Html.Partial("_DataTableScript")*@
     <!-- END PAGE LEVEL SCRIPTS -->
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         jQuery(document).ready(function () {
             Metronic.init(); // init metronic core componets
             Metronic.initAjax();
@@ -348,7 +353,7 @@
                 place: 'prepend'
             });
         }
-    </script>
+    </script>*@
     <!-- END JAVASCRIPTS -->
 </body>
 </html>

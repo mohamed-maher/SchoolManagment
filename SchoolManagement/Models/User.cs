@@ -12,19 +12,21 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tEmployee
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tEmployee()
+        public User()
         {
-            this.tUsers = new HashSet<tUser>();
+            this.UserAccessRoles = new HashSet<UserAccessRole>();
         }
     
+        public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
         public int EmployeeID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     
+        public virtual Staff Staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tUser> tUsers { get; set; }
+        public virtual ICollection<UserAccessRole> UserAccessRoles { get; set; }
     }
 }

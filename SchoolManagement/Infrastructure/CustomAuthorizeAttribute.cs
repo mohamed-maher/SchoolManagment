@@ -11,7 +11,7 @@ namespace SchoolManagement.Infrastructure
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        SecurityEntities db = new SecurityEntities();
+        SMSEntities db = new SMSEntities();
         //public CustomAuthorizeAttribute(string roleSelector)
         //{
         //    Roles = CustomHelper.GetRoles(roleSelector);

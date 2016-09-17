@@ -12,18 +12,19 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tModule
+    public partial class Specialty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tModule()
+        public Specialty()
         {
-            this.tAccessRoleDets = new HashSet<tAccessRoleDet>();
+            this.Staffs = new HashSet<Staff>();
         }
     
-        public int ModuleID { get; set; }
-        public string ModuleName { get; set; }
+        public int SpecialtyID { get; set; }
+        public string Specialty_ar { get; set; }
+        public string Specialty_en { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tAccessRoleDet> tAccessRoleDets { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

@@ -12,21 +12,19 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tAccessRole
+    public partial class AccessRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tAccessRole()
+        public AccessRole()
         {
-            this.tAccessRoleDets = new HashSet<tAccessRoleDet>();
-            this.tUserAccessRoles = new HashSet<tUserAccessRole>();
+            this.UserAccessRoles = new HashSet<UserAccessRole>();
         }
     
         public int AccessRoleID { get; set; }
-        public string AccessRoleName { get; set; }
+        public string AccessRoleName_ar { get; set; }
+        public string AccessRoleName_en { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tAccessRoleDet> tAccessRoleDets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tUserAccessRole> tUserAccessRoles { get; set; }
+        public virtual ICollection<UserAccessRole> UserAccessRoles { get; set; }
     }
 }

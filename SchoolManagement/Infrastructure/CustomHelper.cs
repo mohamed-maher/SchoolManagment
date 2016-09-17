@@ -12,11 +12,11 @@ namespace SchoolManagement.Infrastructure
     {
         public static string GetRoles(string roleSelector)
         {
-            SecurityEntities db = new SecurityEntities();
+            SMSEntities db = new SMSEntities();
             string roles = string.Empty;
-            List<tAccessRoleDet> data = db.tAccessRoleDets.Where(m => m.tModule.ModuleName == roleSelector).ToList();
-            foreach (tAccessRoleDet r in data)
-                roles += r.tModule.ModuleName + ',';
+            //List<AccessRoleDet> data = db.tAccessRoleDets.Where(m => m.tModule.ModuleName == roleSelector).ToList();
+            //foreach (tAccessRoleDet r in data)
+            //    roles += r.tModule.ModuleName + ',';
             roles = roles.Substring(1, roles.Length - 1);
 
             return roles;
@@ -24,13 +24,13 @@ namespace SchoolManagement.Infrastructure
 
         public static bool AddRoles()
         {
-            SecurityEntities db = new SecurityEntities();
-            var accessrole = (from ac in db.tAccessRoles
-                              join userac in db.tUserAccessRoles on ac.AccessRoleID equals userac.AccessRoleID
-                              where userac.UserID == SessionPersister.User.UserID
+            SMSEntities db = new SMSEntities();
+            var accessrole = (from ac in db.AccessRoles
+                              from userac in db.UserAccessRoles 
+                              where userac.User == SessionPersister.User
                               select new
                               {
-                                  AccessRoleName = ac.AccessRoleName
+                                  AccessRoleName = ac.AccessRoleName_en
                               });
             IdentityResult ir;
             var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));

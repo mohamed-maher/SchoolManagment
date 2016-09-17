@@ -1,0 +1,26 @@
+﻿@(Html.Kendo().MultiSelect()
+          .Name("required")
+          .Placeholder("Select attendees...")
+          .BindTo(new List<string>() {
+              "Steven White",
+              "Nancy King",
+              "Anne King",
+              "Nancy Davolio",
+              "Robert Davolio",
+              "Michael Leverling",
+              "Andrew Callahan",
+              "Michael Suyama",
+              "Anne King",
+              "Laura Peacock",
+              "Robert Fuller",
+              "Janet White",
+              "Nancy Leverling",
+              "Robert Buchanan",
+              "Andrew Fuller",
+              "Anne Davolio",
+              "Andrew Suyama",
+              "Nige Buchanan",
+              "Laura Fuller"
+          })
+          .Value(new string[] { "Anne King", "Andrew Fuller" })
+)

@@ -13,10 +13,10 @@ namespace SchoolManagement.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SecurityEntities : DbContext
+    public partial class SMSEntities : DbContext
     {
-        public SecurityEntities()
-            : base("name=SecurityEntities")
+        public SMSEntities()
+            : base("name=SMSEntities")
         {
         }
     
@@ -25,11 +25,13 @@ namespace SchoolManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tAccessRole> tAccessRoles { get; set; }
-        public virtual DbSet<tAccessRoleDet> tAccessRoleDets { get; set; }
-        public virtual DbSet<tEmployee> tEmployees { get; set; }
-        public virtual DbSet<tModule> tModules { get; set; }
-        public virtual DbSet<tUser> tUsers { get; set; }
-        public virtual DbSet<tUserAccessRole> tUserAccessRoles { get; set; }
+        public virtual DbSet<AccessRole> AccessRoles { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
+        public virtual DbSet<Specialty> Specialties { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserAccessRole> UserAccessRoles { get; set; }
     }
 }

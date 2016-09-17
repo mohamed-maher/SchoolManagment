@@ -443,6 +443,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\SpecialtyController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -451,7 +453,16 @@
     <Compile Include="Infrastructure\CustomPrincipal.cs" />
     <Compile Include="Infrastructure\LocalizationAttribute.cs" />
     <Compile Include="Infrastructure\SessionPersister.cs" />
+    <Compile Include="Models\AccessRole.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Gender.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grade.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\School.Context.cs">
@@ -469,22 +480,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>School.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\tAccessRole.cs">
+    <Compile Include="Models\Specialty.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tAccessRoleDet.cs">
+    <Compile Include="Models\Staff.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tEmployee.cs">
+    <Compile Include="Models\Student.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tModule.cs">
+    <Compile Include="Models\User.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tUser.cs">
-      <DependentUpon>School.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tUserAccessRole.cs">
+    <Compile Include="Models\UserAccessRole.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -849,6 +857,7 @@
     <Content Include="css\components.css" />
     <Content Include="css\custom-rtl.css" />
     <Content Include="css\custom.css" />
+    <Content Include="css\grid.css" />
     <Content Include="css\layout-rtl.css" />
     <Content Include="css\layout.css" />
     <Content Include="css\login-rtl.css" />
@@ -1587,13 +1596,6 @@
     <Content Include="plugins\uniform\jquery.uniform.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\School.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>School.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\School.edmx.diagram">
-      <DependentUpon>School.edmx</DependentUpon>
-    </Content>
     <Content Include="plugins\bootstrap-datepicker\LICENSE" />
     <Content Include="plugins\bootstrap-datepicker\README.md" />
     <Content Include="plugins\bootstrap-daterangepicker\README.md" />
@@ -1785,6 +1787,15 @@
     <Content Include="Content\kendo\2016.2.714\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\kendo\2016.2.714\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\2016.2.714\kendo.uniform.mobile.min.css.map" />
+    <EntityDeploy Include="Models\School.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>School.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\School.edmx.diagram">
+      <DependentUpon>School.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\DINNextLTArabic-Regular.ttf" />
+    <None Include="Properties\PublishProfiles\mohamed-maher_SQLLogin_1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatable.js" />
     <Content Include="Scripts\demo.js" />
@@ -1935,9 +1946,16 @@
     <Content Include="Scripts\metronic.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\pako.js" />
+    <Content Include="Scripts\pako.min.js" />
+    <Content Include="Scripts\pako_deflate.js" />
+    <Content Include="Scripts\pako_deflate.min.js" />
+    <Content Include="Scripts\pako_inflate.js" />
+    <Content Include="Scripts\pako_inflate.min.js" />
     <Content Include="Scripts\pickers.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SMS\General.js" />
     <Content Include="Scripts\tasks.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -2121,6 +2139,13 @@
     <Content Include="Views\Shared\EditorTemplates\ListView.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Grid.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Menu.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultiSelect.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Upload.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Buton.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RequiredString.cshtml" />
+    <Content Include="Views\Specialty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

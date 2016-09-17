@@ -10,7 +10,7 @@ namespace SchoolManagement.Controllers
 {
     public class LoginController : Controller
     {
-        SecurityEntities db = new SecurityEntities();
+        SMSEntities db = new SMSEntities();
         // GET: Login
         public ActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace SchoolManagement.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(string username, int password)
+        public ActionResult Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
                 ViewBag.Error = "Please Enter User Name";
@@ -27,9 +27,9 @@ namespace SchoolManagement.Controllers
                 ViewBag.Error = "Please Enter Password";
             else
             {
-                List<tUser> n = db.tUsers.Where(u => u.UserName == username).ToList();
-                List<tUser> p = db.tUsers.Where(u => u.Password == password).ToList();
-                tUser user = db.tUsers.Single(u => u.UserName == username && u.Password == password);
+                List<User> n = db.Users.Where(u => u.UserName == username).ToList();
+                List<User> p = db.Users.Where(u => u.Password == password).ToList();
+                User user = db.Users.Single(u => u.UserName == username && u.Password == password);
                 if (user == null)
                 {
                     SessionPersister.UserName = string.Empty;
@@ -43,10 +43,14 @@ namespace SchoolManagement.Controllers
                     SessionPersister.User = user;
                     CustomPrincipal cp = new CustomPrincipal(user.UserName);
                     CustomHelper.AddRoles();
-                    return RedirectToAction("Index", "Modules");
+                    return RedirectToAction("Index", "Staff");
                 }
             }
             return View("Index");
+        }
+        public JsonResult SelectIDs()
+        {
+            return Json(10, JsonRequestBehavior.AllowGet);
         }
     }
 }

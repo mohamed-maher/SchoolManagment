@@ -12,13 +12,13 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tUserAccessRole
+    public partial class UserAccessRole
     {
-        public int UserAccessRolID { get; set; }
+        public int UserAccessRoleID { get; set; }
         public int UserID { get; set; }
         public int AccessRoleID { get; set; }
     
-        public virtual tAccessRole tAccessRole { get; set; }
-        public virtual tUser tUser { get; set; }
+        public virtual AccessRole AccessRole { get; set; }
+        public virtual User User { get; set; }
     }
 }
