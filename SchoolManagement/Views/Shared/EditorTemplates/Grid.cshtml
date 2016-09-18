@@ -1,0 +1,154 @@
+﻿@(Html.Kendo().Grid<Staff>().Name("KGrid").Columns(column =>
+{
+    column.Bound(model => model.FirstName_ar).Title("First Name(AR)").EditorTemplateName("RequiredString");
+    column.Bound(model => model.FirstName_en).Title("First Name(EN)").EditorTemplateName("RequiredString");
+    column.Bound(model => model.LastName_ar).Title("Last Name(AR)").EditorTemplateName("RequiredString");
+    column.Bound(model => model.LastName_en).Title("Last Name(EN)").EditorTemplateName("RequiredString");
+    column.Bound(model => model.DateOfBirth).Title("Date Of Birth").Format("{0:dd/MM/yyyy}").EditorTemplateName("Date");
+    column.Bound(model => model.Address);
+    column.Bound(model => model.Telephone);
+    column.Bound(model => model.MobilePhone).Title("Mobile");
+    column.Bound(model => model.HiringDate).Title("Hiring Date").Format("{0:dd/MM/yyyy}").EditorTemplateName("Date");
+    column.Bound(model => model.YearsOfService).Title("Experience").EditorTemplateName("Integer");
+    column.ForeignKey(p => p.GenderID, (System.Collections.IEnumerable)ViewData["Gender"], "GenderID", "GenderType_ar").Title("Gender");
+    column.Command(command =>
+    {
+        command.Edit();
+        command.Destroy();
+    }).Title("Commands").Width(300);
+})
+.DataSource(datasource => datasource
+        .Ajax()
+    //.ServerOperation(false)
+    .Read(read => read.Action("Staffs_Read", "Staff"))
+    .Create(create => create.Action("Staffs_Create", "Staff"))
+    .Update(update => update.Action("Staffs_Update", "Staff"))
+    .Destroy(delete => delete.Action("Staffs_Destroy", "Staff"))
+    .PageSize(10)
+    .Model(model =>
+    {
+        model.Id(m => m.EmployeeID); // Specify the property which is the unique identifier of the model.
+        model.Field(m => m.EmployeeID).Editable(false); // Make the ProductID property not editable.
+    })
+)
+.ToolBar(toolBar =>
+{
+    toolBar.Create();
+    toolBar.Save();
+    toolBar.Pdf();
+    toolBar.Excel();
+})
+.Groupable()
+.Sortable()
+.Filterable()
+.Pageable()
+.Resizable(resize => resize.Columns(true))
+//.Navigatable()
+//.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+.Editable(ed => ed.Mode(GridEditMode.InLine))
+//.ToolBar(t => t.Create())
+//.Aggregates(aggregates =>
+//{
+//    aggregates.Add(product => product.UnitsInStock).Min().Max().Count();
+//    aggregates.Add(product => product.UnitsOnOrder).Average();
+//    aggregates.Add(product => product.ProductName).Count();
+//    aggregates.Add(product => product.UnitPrice).Sum();
+//})
+.ToolBar(toolbar =>
+{
+    toolbar.Template(@<text>
+        <div class="toolbar">
+            <label class="category-label" for="category">Show products by category:</label>
+            @(Html.Kendo().DropDownList()
+                            .Name("categories")
+                            .OptionLabel("All")
+                            .DataTextField("CategoryName")
+                            .DataValueField("CategoryID")
+                            .AutoBind(false)
+                            .Events(e => e.Change("categoriesChange"))
+                            .HtmlAttributes(new { style = "width: 150px;" })
+                            .DataSource(ds =>
+                            {
+                                ds.Read("ToolbarTemplate_Categories", "Grid");
+                            })
+            )
+        </div>
+    </text>);
+})
+.Pdf(pdf => pdf
+    .AllPages()
+    .AvoidLinks()
+    .PaperSize("A4")
+    .Scale(0.8)
+    .Margin("2cm", "1cm", "1cm", "1cm")
+    .Landscape()
+    .RepeatHeaders()
+    .TemplateId("page-template")
+    .FileName("Kendo UI Grid Export.pdf")
+.ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
+)
+.Excel(excel => excel
+    .FileName("Kendo UI Grid Export.xlsx")
+    .Filterable(true)
+    .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+)
+
+<script>
+    function categoriesChange() {
+        var value = this.value(),
+		 	 grid = $("#grid").data("kendoGrid");
+
+        if (value) {
+            grid.dataSource.filter({ field: "CategoryID", operator: "eq", value: parseInt(value) });
+        } else {
+            grid.dataSource.filter({});
+        }
+    }
+    //    $("#grid .k-grid-content").css({
+    //        "overflow-y": "scroll"
+    //});
+
+    function toggleScrollbar(e) {
+        var value = this._data.length,
+		 	 grid = $("#grid").data("kendoGrid");
+
+        if (value) {
+            grid.scrollbar.height(200 * value);
+            grid.dataSource.pagesize(1);
+        } else {
+            grid.dataSource.filter({});
+        }
+        grid.refresh();
+
+        var gridWrapper = e.sender.wrapper;
+        var gridDataTable = e.sender.table;
+        var gridDataArea = gridDataTable.closest(".k-grid-content");
+
+        gridWrapper.toggleClass("no-scrollbar", gridDataTable[0].offsetHeight < gridDataArea[0].offsetHeight);
+    }
+    function onDataBound(arg) {
+        if (arg.sender._data.l0ength == 0) {
+            var contentDiv = this.wrapper.children(".k-grid-content"),
+            dataTable = contentDiv.children("table");
+            if (!dataTable.find("tr").length) {
+                dataTable.children("tbody").append("<tr colspan='" + this.columns.length + "'><td> </td></tr>");
+                if ($.browser.msie) {
+                    dataTable.width(this.wrapper.children(".k-grid-header").find("table").width());
+                    contentDiv.scrollLeft(1);
+                }
+            }
+        }
+    }
+    function dataBound(e) {
+        if (this.dataSource.view().length == 0) {
+            //insert empty row
+            var colspan = this.thead.find("th").length;
+            var emptyRow = "<tr><td colspan='" + colspan + "'></td></tr>";
+            this.tbody.html(emptyRow);
+
+            //workarounds for IE lt 9
+            this.table.width(800);
+            $(".k-grid-content").height(2 * kendo.support.scrollbar());
+        }
+    }
+</script>

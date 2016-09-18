@@ -4,661 +4,513 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SecurityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="nvarchar(max)" />
-          <Property Name="ClaimValue" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tAccessRole">
+    <Schema Namespace="SMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessRole">
           <Key>
             <PropertyRef Name="AccessRoleID" />
           </Key>
           <Property Name="AccessRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccessRoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccessRoleName_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccessRoleName_en" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="tAccessRoleDet">
+        <EntityType Name="Gender">
           <Key>
-            <PropertyRef Name="AccessRoleDetID" />
+            <PropertyRef Name="GenderID" />
           </Key>
-          <Property Name="AccessRoleDetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccessRoleID" Type="int" Nullable="false" />
-          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderType_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GenderType_en" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="tEmployee">
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GradeName_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GradeName_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="SpecialtyID" />
+          </Key>
+          <Property Name="SpecialtyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Specialty_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Specialty_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="EmployeeID" />
           </Key>
           <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="GenderID" Type="int" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="HiringDate" Type="date" />
+          <Property Name="YearsOfService" Type="int" />
+          <Property Name="SpecialtyID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="tModule">
+        <EntityType Name="Student">
           <Key>
-            <PropertyRef Name="ModuleID" />
+            <PropertyRef Name="StudentID" />
           </Key>
-          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ModuleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="StudentName_ar" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StudentName_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="PlaceOfBirth" Type="varchar" MaxLength="100" />
+          <Property Name="SexID" Type="int" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="FatherName_ar" Type="nvarchar" MaxLength="50" />
+          <Property Name="FatherName_en" Type="nvarchar" MaxLength="50" />
+          <Property Name="MotherName_ar" Type="nvarchar" MaxLength="50" />
+          <Property Name="MotherName_en" Type="nvarchar" MaxLength="50" />
+          <Property Name="FatherProfession" Type="nvarchar" MaxLength="50" />
+          <Property Name="MotherProfession" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="tUser">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmployeeID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="tUserAccessRole">
+        <EntityType Name="UserAccessRole">
           <Key>
-            <PropertyRef Name="UserAccessRolID" />
+            <PropertyRef Name="UserAccessRoleID" />
           </Key>
-          <Property Name="UserAccessRolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAccessRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="AccessRoleID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+        <Association Name="FK_Staff_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Staff">
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+        <Association Name="FK_Staff_Specialty">
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="Specialty">
+              <PropertyRef Name="SpecialtyID" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Staff">
+              <PropertyRef Name="SpecialtyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+        <Association Name="FK_Student_Grade">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
             </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
+            <Dependent Role="Student">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+        <Association Name="FK_User_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tAccessRoleDet_tAccessRole">
-          <End Role="tAccessRole" Type="Self.tAccessRole" Multiplicity="1" />
-          <End Role="tAccessRoleDet" Type="Self.tAccessRoleDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tAccessRole">
-              <PropertyRef Name="AccessRoleID" />
-            </Principal>
-            <Dependent Role="tAccessRoleDet">
-              <PropertyRef Name="AccessRoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tAccessRoleDet_tModule">
-          <End Role="tModule" Type="Self.tModule" Multiplicity="1" />
-          <End Role="tAccessRoleDet" Type="Self.tAccessRoleDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tModule">
-              <PropertyRef Name="ModuleID" />
-            </Principal>
-            <Dependent Role="tAccessRoleDet">
-              <PropertyRef Name="ModuleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tUser_tEmployee">
-          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
-          <End Role="tUser" Type="Self.tUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tEmployee">
+            <Principal Role="Staff">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="tUser">
+            <Dependent Role="User">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccessRole_tAccessRole">
-          <End Role="tAccessRole" Type="Self.tAccessRole" Multiplicity="1" />
-          <End Role="tUserAccessRole" Type="Self.tUserAccessRole" Multiplicity="*" />
+        <Association Name="FK_UserAccessRole_AccessRole">
+          <End Role="AccessRole" Type="Self.AccessRole" Multiplicity="1" />
+          <End Role="UserAccessRole" Type="Self.UserAccessRole" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tAccessRole">
+            <Principal Role="AccessRole">
               <PropertyRef Name="AccessRoleID" />
             </Principal>
-            <Dependent Role="tUserAccessRole">
+            <Dependent Role="UserAccessRole">
               <PropertyRef Name="AccessRoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccessRole_tUser">
-          <End Role="tUser" Type="Self.tUser" Multiplicity="1" />
-          <End Role="tUserAccessRole" Type="Self.tUserAccessRole" Multiplicity="*" />
+        <Association Name="FK_UserAccessRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserAccessRole" Type="Self.UserAccessRole" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tUser">
+            <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="tUserAccessRole">
+            <Dependent Role="UserAccessRole">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SecurityModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tAccessRole" EntityType="Self.tAccessRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tAccessRoleDet" EntityType="Self.tAccessRoleDet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tEmployee" EntityType="Self.tEmployee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tModule" EntityType="Self.tModule" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tUser" EntityType="Self.tUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tUserAccessRole" EntityType="Self.tUserAccessRole" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+        <EntityContainer Name="SMSModelStoreContainer">
+          <EntitySet Name="AccessRole" EntityType="Self.AccessRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialty" EntityType="Self.Specialty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccessRole" EntityType="Self.UserAccessRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Staff_Gender" Association="Self.FK_Staff_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          <AssociationSet Name="FK_Staff_Specialty" Association="Self.FK_Staff_Specialty">
+            <End Role="Specialty" EntitySet="Specialty" />
+            <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          <AssociationSet Name="FK_Student_Grade" Association="Self.FK_Student_Grade">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          <AssociationSet Name="FK_User_Staff" Association="Self.FK_User_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_tAccessRoleDet_tAccessRole" Association="Self.FK_tAccessRoleDet_tAccessRole">
-            <End Role="tAccessRole" EntitySet="tAccessRole" />
-            <End Role="tAccessRoleDet" EntitySet="tAccessRoleDet" />
+          <AssociationSet Name="FK_UserAccessRole_AccessRole" Association="Self.FK_UserAccessRole_AccessRole">
+            <End Role="AccessRole" EntitySet="AccessRole" />
+            <End Role="UserAccessRole" EntitySet="UserAccessRole" />
           </AssociationSet>
-          <AssociationSet Name="FK_tAccessRoleDet_tModule" Association="Self.FK_tAccessRoleDet_tModule">
-            <End Role="tModule" EntitySet="tModule" />
-            <End Role="tAccessRoleDet" EntitySet="tAccessRoleDet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tUser_tEmployee" Association="Self.FK_tUser_tEmployee">
-            <End Role="tEmployee" EntitySet="tEmployee" />
-            <End Role="tUser" EntitySet="tUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccessRole_tAccessRole" Association="Self.FK_UserAccessRole_tAccessRole">
-            <End Role="tAccessRole" EntitySet="tAccessRole" />
-            <End Role="tUserAccessRole" EntitySet="tUserAccessRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccessRole_tUser" Association="Self.FK_UserAccessRole_tUser">
-            <End Role="tUser" EntitySet="tUser" />
-            <End Role="tUserAccessRole" EntitySet="tUserAccessRole" />
+          <AssociationSet Name="FK_UserAccessRole_User" Association="Self.FK_UserAccessRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAccessRole" EntitySet="UserAccessRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaim">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogin">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="tAccessRole">
+      <Schema Namespace="SMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessRoles" EntityType="SMSModel.AccessRole" />
+          <EntitySet Name="Genders" EntityType="SMSModel.Gender" />
+          <EntitySet Name="Grades" EntityType="SMSModel.Grade" />
+          <EntitySet Name="Specialties" EntityType="SMSModel.Specialty" />
+          <EntitySet Name="Staffs" EntityType="SMSModel.Staff" />
+          <EntitySet Name="Students" EntityType="SMSModel.Student" />
+          <EntitySet Name="Users" EntityType="SMSModel.User" />
+          <EntitySet Name="UserAccessRoles" EntityType="SMSModel.UserAccessRole" />
+          <AssociationSet Name="FK_UserAccessRole_AccessRole" Association="SMSModel.FK_UserAccessRole_AccessRole">
+            <End Role="AccessRole" EntitySet="AccessRoles" />
+            <End Role="UserAccessRole" EntitySet="UserAccessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Gender" Association="SMSModel.FK_Staff_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Grade" Association="SMSModel.FK_Student_Grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Specialty" Association="SMSModel.FK_Staff_Specialty">
+            <End Role="Specialty" EntitySet="Specialties" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Staff" Association="SMSModel.FK_User_Staff">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccessRole_User" Association="SMSModel.FK_UserAccessRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserAccessRole" EntitySet="UserAccessRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccessRole">
           <Key>
             <PropertyRef Name="AccessRoleID" />
           </Key>
           <Property Name="AccessRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccessRoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tAccessRoleDets" Relationship="Self.FK_tAccessRoleDet_tAccessRole" FromRole="tAccessRole" ToRole="tAccessRoleDet" />
-          <NavigationProperty Name="tUserAccessRoles" Relationship="Self.FK_UserAccessRole_tAccessRole" FromRole="tAccessRole" ToRole="tUserAccessRole" />
+          <Property Name="AccessRoleName_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccessRoleName_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserAccessRoles" Relationship="SMSModel.FK_UserAccessRole_AccessRole" FromRole="AccessRole" ToRole="UserAccessRole" />
         </EntityType>
-        <EntityType Name="tAccessRoleDet">
+        <EntityType Name="Gender">
           <Key>
-            <PropertyRef Name="AccessRoleDetID" />
+            <PropertyRef Name="GenderID" />
           </Key>
-          <Property Name="AccessRoleDetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccessRoleID" Type="Int32" Nullable="false" />
-          <Property Name="ModuleID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tAccessRole" Relationship="Self.FK_tAccessRoleDet_tAccessRole" FromRole="tAccessRoleDet" ToRole="tAccessRole" />
-          <NavigationProperty Name="tModule" Relationship="Self.FK_tAccessRoleDet_tModule" FromRole="tAccessRoleDet" ToRole="tModule" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderType_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderType_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staffs" Relationship="SMSModel.FK_Staff_Gender" FromRole="Gender" ToRole="Staff" />
         </EntityType>
-        <EntityType Name="tEmployee">
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeName_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GradeName_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="SMSModel.FK_Student_Grade" FromRole="Grade" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="SpecialtyID" />
+          </Key>
+          <Property Name="SpecialtyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Specialty_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Specialty_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staffs" Relationship="SMSModel.FK_Staff_Specialty" FromRole="Specialty" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="EmployeeID" />
           </Key>
           <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tUsers" Relationship="Self.FK_tUser_tEmployee" FromRole="tEmployee" ToRole="tUser" />
+          <Property Name="FirstName_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="GenderID" Type="Int32" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HiringDate" Type="DateTime" Precision="0" />
+          <Property Name="YearsOfService" Type="Int32" />
+          <Property Name="SpecialtyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="SMSModel.FK_Staff_Gender" FromRole="Staff" ToRole="Gender" />
+          <NavigationProperty Name="Specialty" Relationship="SMSModel.FK_Staff_Specialty" FromRole="Staff" ToRole="Specialty" />
+          <NavigationProperty Name="Users" Relationship="SMSModel.FK_User_Staff" FromRole="Staff" ToRole="User" />
         </EntityType>
-        <EntityType Name="tModule">
+        <EntityType Name="Student">
           <Key>
-            <PropertyRef Name="ModuleID" />
+            <PropertyRef Name="StudentID" />
           </Key>
-          <Property Name="ModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tAccessRoleDets" Relationship="Self.FK_tAccessRoleDet_tModule" FromRole="tModule" ToRole="tAccessRoleDet" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="StudentName_ar" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudentName_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PlaceOfBirth" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SexID" Type="Int32" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName_ar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName_en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName_ar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName_en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FatherProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MotherProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Grade" Relationship="SMSModel.FK_Student_Grade" FromRole="Student" ToRole="Grade" />
         </EntityType>
-        <EntityType Name="tUser">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tUser_tEmployee" FromRole="tUser" ToRole="tEmployee" />
-          <NavigationProperty Name="tUserAccessRoles" Relationship="Self.FK_UserAccessRole_tUser" FromRole="tUser" ToRole="tUserAccessRole" />
+          <NavigationProperty Name="Staff" Relationship="SMSModel.FK_User_Staff" FromRole="User" ToRole="Staff" />
+          <NavigationProperty Name="UserAccessRoles" Relationship="SMSModel.FK_UserAccessRole_User" FromRole="User" ToRole="UserAccessRole" />
         </EntityType>
-        <EntityType Name="tUserAccessRole">
+        <EntityType Name="UserAccessRole">
           <Key>
-            <PropertyRef Name="UserAccessRolID" />
+            <PropertyRef Name="UserAccessRoleID" />
           </Key>
-          <Property Name="UserAccessRolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAccessRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="AccessRoleID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tAccessRole" Relationship="Self.FK_UserAccessRole_tAccessRole" FromRole="tUserAccessRole" ToRole="tAccessRole" />
-          <NavigationProperty Name="tUser" Relationship="Self.FK_UserAccessRole_tUser" FromRole="tUserAccessRole" ToRole="tUser" />
+          <NavigationProperty Name="AccessRole" Relationship="SMSModel.FK_UserAccessRole_AccessRole" FromRole="UserAccessRole" ToRole="AccessRole" />
+          <NavigationProperty Name="User" Relationship="SMSModel.FK_UserAccessRole_User" FromRole="UserAccessRole" ToRole="User" />
         </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+        <Association Name="FK_UserAccessRole_AccessRole">
+          <End Type="SMSModel.AccessRole" Role="AccessRole" Multiplicity="1" />
+          <End Type="SMSModel.UserAccessRole" Role="UserAccessRole" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tAccessRoleDet_tAccessRole">
-          <End Role="tAccessRole" Type="Self.tAccessRole" Multiplicity="1" />
-          <End Role="tAccessRoleDet" Type="Self.tAccessRoleDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tAccessRole">
+            <Principal Role="AccessRole">
               <PropertyRef Name="AccessRoleID" />
             </Principal>
-            <Dependent Role="tAccessRoleDet">
+            <Dependent Role="UserAccessRole">
               <PropertyRef Name="AccessRoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccessRole_tAccessRole">
-          <End Role="tAccessRole" Type="Self.tAccessRole" Multiplicity="1" />
-          <End Role="tUserAccessRole" Type="Self.tUserAccessRole" Multiplicity="*" />
+        <Association Name="FK_Staff_Gender">
+          <End Type="SMSModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="SMSModel.Staff" Role="Staff" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tAccessRole">
-              <PropertyRef Name="AccessRoleID" />
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
             </Principal>
-            <Dependent Role="tUserAccessRole">
-              <PropertyRef Name="AccessRoleID" />
+            <Dependent Role="Staff">
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tAccessRoleDet_tModule">
-          <End Role="tModule" Type="Self.tModule" Multiplicity="1" />
-          <End Role="tAccessRoleDet" Type="Self.tAccessRoleDet" Multiplicity="*" />
+        <Association Name="FK_Student_Grade">
+          <End Type="SMSModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="SMSModel.Student" Role="Student" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="tModule">
-              <PropertyRef Name="ModuleID" />
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
             </Principal>
-            <Dependent Role="tAccessRoleDet">
-              <PropertyRef Name="ModuleID" />
+            <Dependent Role="Student">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tUser_tEmployee">
-          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
-          <End Role="tUser" Type="Self.tUser" Multiplicity="*" />
+        <Association Name="FK_Staff_Specialty">
+          <End Type="SMSModel.Specialty" Role="Specialty" Multiplicity="1" />
+          <End Type="SMSModel.Staff" Role="Staff" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tEmployee">
+            <Principal Role="Specialty">
+              <PropertyRef Name="SpecialtyID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="SpecialtyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Staff">
+          <End Type="SMSModel.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="SMSModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="tUser">
+            <Dependent Role="User">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserAccessRole_tUser">
-          <End Role="tUser" Type="Self.tUser" Multiplicity="1" />
-          <End Role="tUserAccessRole" Type="Self.tUserAccessRole" Multiplicity="*" />
+        <Association Name="FK_UserAccessRole_User">
+          <End Type="SMSModel.User" Role="User" Multiplicity="1" />
+          <End Type="SMSModel.UserAccessRole" Role="UserAccessRole" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tUser">
+            <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="tUserAccessRole">
+            <Dependent Role="UserAccessRole">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="SecurityEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="tAccessRoles" EntityType="Self.tAccessRole" />
-          <EntitySet Name="tAccessRoleDets" EntityType="Self.tAccessRoleDet" />
-          <EntitySet Name="tEmployees" EntityType="Self.tEmployee" />
-          <EntitySet Name="tModules" EntityType="Self.tModule" />
-          <EntitySet Name="tUsers" EntityType="Self.tUser" />
-          <EntitySet Name="tUserAccessRoles" EntityType="Self.tUserAccessRole" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tAccessRoleDet_tAccessRole" Association="Self.FK_tAccessRoleDet_tAccessRole">
-            <End Role="tAccessRole" EntitySet="tAccessRoles" />
-            <End Role="tAccessRoleDet" EntitySet="tAccessRoleDets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccessRole_tAccessRole" Association="Self.FK_UserAccessRole_tAccessRole">
-            <End Role="tAccessRole" EntitySet="tAccessRoles" />
-            <End Role="tUserAccessRole" EntitySet="tUserAccessRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tAccessRoleDet_tModule" Association="Self.FK_tAccessRoleDet_tModule">
-            <End Role="tModule" EntitySet="tModules" />
-            <End Role="tAccessRoleDet" EntitySet="tAccessRoleDets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tUser_tEmployee" Association="Self.FK_tUser_tEmployee">
-            <End Role="tEmployee" EntitySet="tEmployees" />
-            <End Role="tUser" EntitySet="tUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccessRole_tUser" Association="Self.FK_UserAccessRole_tUser">
-            <End Role="tUser" EntitySet="tUsers" />
-            <End Role="tUserAccessRole" EntitySet="tUserAccessRoles" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SecurityModelStoreContainer" CdmEntityContainer="SecurityEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="SecurityModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="SecurityModel.AspNetRole">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="SecurityModel.AspNetUserClaim">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="SecurityModel.AspNetUserLogin">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="SecurityModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tAccessRoles">
-            <EntityTypeMapping TypeName="SecurityModel.tAccessRole">
-              <MappingFragment StoreEntitySet="tAccessRole">
+        <EntityContainerMapping StorageEntityContainer="SMSModelStoreContainer" CdmEntityContainer="SMSEntities">
+          <EntitySetMapping Name="AccessRoles">
+            <EntityTypeMapping TypeName="SMSModel.AccessRole">
+              <MappingFragment StoreEntitySet="AccessRole">
+                <ScalarProperty Name="AccessRoleName_en" ColumnName="AccessRoleName_en" />
+                <ScalarProperty Name="AccessRoleName_ar" ColumnName="AccessRoleName_ar" />
                 <ScalarProperty Name="AccessRoleID" ColumnName="AccessRoleID" />
-                <ScalarProperty Name="AccessRoleName" ColumnName="AccessRoleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tAccessRoleDets">
-            <EntityTypeMapping TypeName="SecurityModel.tAccessRoleDet">
-              <MappingFragment StoreEntitySet="tAccessRoleDet">
-                <ScalarProperty Name="AccessRoleDetID" ColumnName="AccessRoleDetID" />
-                <ScalarProperty Name="AccessRoleID" ColumnName="AccessRoleID" />
-                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="SMSModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderType_en" ColumnName="GenderType_en" />
+                <ScalarProperty Name="GenderType_ar" ColumnName="GenderType_ar" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tEmployees">
-            <EntityTypeMapping TypeName="SecurityModel.tEmployee">
-              <MappingFragment StoreEntitySet="tEmployee">
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="SMSModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="GradeName_en" ColumnName="GradeName_en" />
+                <ScalarProperty Name="GradeName_ar" ColumnName="GradeName_ar" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialties">
+            <EntityTypeMapping TypeName="SMSModel.Specialty">
+              <MappingFragment StoreEntitySet="Specialty">
+                <ScalarProperty Name="Specialty_en" ColumnName="Specialty_en" />
+                <ScalarProperty Name="Specialty_ar" ColumnName="Specialty_ar" />
+                <ScalarProperty Name="SpecialtyID" ColumnName="SpecialtyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="SMSModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="SpecialtyID" ColumnName="SpecialtyID" />
+                <ScalarProperty Name="YearsOfService" ColumnName="YearsOfService" />
+                <ScalarProperty Name="HiringDate" ColumnName="HiringDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName_en" ColumnName="LastName_en" />
+                <ScalarProperty Name="LastName_ar" ColumnName="LastName_ar" />
+                <ScalarProperty Name="FirstName_en" ColumnName="FirstName_en" />
+                <ScalarProperty Name="FirstName_ar" ColumnName="FirstName_ar" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tModules">
-            <EntityTypeMapping TypeName="SecurityModel.tModule">
-              <MappingFragment StoreEntitySet="tModule">
-                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
-                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="SMSModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="MotherProfession" ColumnName="MotherProfession" />
+                <ScalarProperty Name="FatherProfession" ColumnName="FatherProfession" />
+                <ScalarProperty Name="MotherName_en" ColumnName="MotherName_en" />
+                <ScalarProperty Name="MotherName_ar" ColumnName="MotherName_ar" />
+                <ScalarProperty Name="FatherName_en" ColumnName="FatherName_en" />
+                <ScalarProperty Name="FatherName_ar" ColumnName="FatherName_ar" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="StudentName_en" ColumnName="StudentName_en" />
+                <ScalarProperty Name="StudentName_ar" ColumnName="StudentName_ar" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tUsers">
-            <EntityTypeMapping TypeName="SecurityModel.tUser">
-              <MappingFragment StoreEntitySet="tUser">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SMSModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tUserAccessRoles">
-            <EntityTypeMapping TypeName="SecurityModel.tUserAccessRole">
-              <MappingFragment StoreEntitySet="tUserAccessRole">
-                <ScalarProperty Name="UserAccessRolID" ColumnName="UserAccessRolID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="AccessRoleID" ColumnName="AccessRoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SecurityModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="UserAccessRoles">
+            <EntityTypeMapping TypeName="SMSModel.UserAccessRole">
+              <MappingFragment StoreEntitySet="UserAccessRole">
+                <ScalarProperty Name="AccessRoleID" ColumnName="AccessRoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserAccessRoleID" ColumnName="UserAccessRoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

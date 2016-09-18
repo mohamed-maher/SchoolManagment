@@ -4,26 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ab14cfae234849b0aafb2fae5a08181e" Name="Diagram1">
-        <EntityTypeShape EntityType="SecurityModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.tAccessRole" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.tAccessRoleDet" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.tEmployee" Width="1.5" PointX="1.5" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.tModule" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.tUser" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SecurityModel.tUserAccessRole" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <AssociationConnector Association="SecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.FK_tAccessRoleDet_tAccessRole" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.FK_UserAccessRole_tAccessRole" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.FK_tAccessRoleDet_tModule" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.FK_tUser_tEmployee" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.FK_UserAccessRole_tUser" ManuallyRouted="false" />
-        <AssociationConnector Association="SecurityModel.AspNetUserRoles" ManuallyRouted="false" />
+      <Diagram DiagramId="427d875f4d5a4f548e005ac719397512" Name="Diagram1">
+        <EntityTypeShape EntityType="SMSModel.AccessRole" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SMSModel.Gender" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SMSModel.Grade" Width="1.5" PointX="5.75" PointY="8.875" />
+        <EntityTypeShape EntityType="SMSModel.Specialty" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SMSModel.Staff" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="SMSModel.Student" Width="1.5" PointX="8" PointY="7.625" />
+        <EntityTypeShape EntityType="SMSModel.User" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="SMSModel.UserAccessRole" Width="1.5" PointX="7.5" PointY="3.625" />
+        <AssociationConnector Association="SMSModel.FK_UserAccessRole_AccessRole" />
+        <AssociationConnector Association="SMSModel.FK_Staff_Gender" />
+        <AssociationConnector Association="SMSModel.FK_Student_Grade" />
+        <AssociationConnector Association="SMSModel.FK_Staff_Specialty" />
+        <AssociationConnector Association="SMSModel.FK_User_Staff" />
+        <AssociationConnector Association="SMSModel.FK_UserAccessRole_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

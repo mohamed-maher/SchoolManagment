@@ -13,7 +13,7 @@ namespace SchoolManagement
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<SchoolManagement.Models.SecurityEntities>(null);
+            Database.SetInitializer<SchoolManagement.Models.SMSEntities>(null);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

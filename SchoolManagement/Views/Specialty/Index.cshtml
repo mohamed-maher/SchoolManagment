@@ -1,0 +1,57 @@
+﻿@using SchoolManagement.Resources;
+@using SchoolManagement.Models;
+@model IEnumerable<Specialty>
+
+@(Html.Kendo().Grid<Specialty>().Name("KGrid").Columns(column =>
+{
+    column.Bound(model => model.Specialty_ar).Title("Specialty(AR)").EditorTemplateName("RequiredString");
+    column.Bound(model => model.Specialty_en).Title("Specialty(EN)").EditorTemplateName("RequiredString");
+    column.Command(command =>
+    {
+        command.Edit();
+        command.Destroy();
+    }).Title("Commands").Width(200);
+})
+.DataSource(datasource => datasource
+        .Ajax()
+    .Read(read => read.Action("Specialty_Read", "Specialty"))
+    .Create(create => create.Action("Specialty_Create", "Specialty"))
+    .Update(update => update.Action("Specialty_Update", "Specialty"))
+    .Destroy(delete => delete.Action("Specialty_Destroy", "Specialty"))
+    .PageSize(10)
+    .Model(model =>
+    {
+        model.Id(m => m.SpecialtyID);
+        model.Field(m => m.SpecialtyID).Editable(false);
+    })
+)
+.Groupable()
+.Sortable()
+.Filterable()
+.Pageable()
+.Resizable(resize => resize.Columns(true))
+.Editable(ed => ed.Mode(GridEditMode.InLine))
+.ToolBar(toolBar =>
+{
+    toolBar.Create();
+    toolBar.Pdf();
+    toolBar.Excel();
+})
+.Pdf(pdf => pdf
+    .AllPages()
+    .AvoidLinks()
+    .PaperSize("A4")
+    .Scale(0.8)
+    .Margin("2cm", "1cm", "1cm", "1cm")
+    .Landscape()
+    .RepeatHeaders()
+    .TemplateId("page-template")
+    .FileName("Specialty.pdf")
+.ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
+)
+.Excel(excel => excel
+    .FileName("Specialty.xlsx")
+    .Filterable(true)
+    .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+)
+)

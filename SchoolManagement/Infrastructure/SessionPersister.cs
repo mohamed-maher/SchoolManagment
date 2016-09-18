@@ -9,7 +9,7 @@ namespace SchoolManagement.Infrastructure
     public class SessionPersister
     {
         static string usernameSession = string.Empty;
-        public static tUser User { get; set; }
+        public static User User { get; set; }
         public static string UserName
         {
             get
