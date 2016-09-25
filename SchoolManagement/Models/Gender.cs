@@ -18,6 +18,7 @@ namespace SchoolManagement.Models
         public Gender()
         {
             this.Staffs = new HashSet<Staff>();
+            this.Students = new HashSet<Student>();
         }
     
         public int GenderID { get; set; }
@@ -26,5 +27,7 @@ namespace SchoolManagement.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

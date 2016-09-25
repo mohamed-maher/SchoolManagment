@@ -65,7 +65,7 @@
           <Property Name="StudentName_en" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="PlaceOfBirth" Type="varchar" MaxLength="100" />
-          <Property Name="SexID" Type="int" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="50" />
           <Property Name="MobilePhone" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
@@ -84,6 +84,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="UserAccessRole">
           <Key>
@@ -117,27 +118,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Student_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Student_Grade">
           <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grade">
               <PropertyRef Name="GradeID" />
             </Principal>
             <Dependent Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Staff">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="EmployeeID" />
+              <PropertyRef Name="GradeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -182,13 +183,13 @@
             <End Role="Specialty" EntitySet="Specialty" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
+          <AssociationSet Name="FK_Student_Gender" Association="Self.FK_Student_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
           <AssociationSet Name="FK_Student_Grade" Association="Self.FK_Student_Grade">
             <End Role="Grade" EntitySet="Grade" />
             <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Staff" Association="Self.FK_User_Staff">
-            <End Role="Staff" EntitySet="Staff" />
-            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_UserAccessRole_AccessRole" Association="Self.FK_UserAccessRole_AccessRole">
             <End Role="AccessRole" EntitySet="AccessRole" />
@@ -220,6 +221,10 @@
             <End Role="Gender" EntitySet="Genders" />
             <End Role="Staff" EntitySet="Staffs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Student_Gender" Association="SMSModel.FK_Student_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
           <AssociationSet Name="FK_Student_Grade" Association="SMSModel.FK_Student_Grade">
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Student" EntitySet="Students" />
@@ -227,10 +232,6 @@
           <AssociationSet Name="FK_Staff_Specialty" Association="SMSModel.FK_Staff_Specialty">
             <End Role="Specialty" EntitySet="Specialties" />
             <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Staff" Association="SMSModel.FK_User_Staff">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_UserAccessRole_User" Association="SMSModel.FK_UserAccessRole_User">
             <End Role="User" EntitySet="Users" />
@@ -254,6 +255,7 @@
           <Property Name="GenderType_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GenderType_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Staffs" Relationship="SMSModel.FK_Staff_Gender" FromRole="Gender" ToRole="Staff" />
+          <NavigationProperty Name="Students" Relationship="SMSModel.FK_Student_Gender" FromRole="Gender" ToRole="Student" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -262,7 +264,7 @@
           <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GradeName_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GradeName_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Student" Relationship="SMSModel.FK_Student_Grade" FromRole="Grade" ToRole="Student" />
+          <NavigationProperty Name="Students" Relationship="SMSModel.FK_Student_Grade" FromRole="Grade" ToRole="Student" />
         </EntityType>
         <EntityType Name="Specialty">
           <Key>
@@ -292,7 +294,6 @@
           <Property Name="SpecialtyID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Gender" Relationship="SMSModel.FK_Staff_Gender" FromRole="Staff" ToRole="Gender" />
           <NavigationProperty Name="Specialty" Relationship="SMSModel.FK_Staff_Specialty" FromRole="Staff" ToRole="Specialty" />
-          <NavigationProperty Name="Users" Relationship="SMSModel.FK_User_Staff" FromRole="Staff" ToRole="User" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -304,7 +305,7 @@
           <Property Name="StudentName_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SexID" Type="Int32" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -314,6 +315,7 @@
           <Property Name="MotherName_en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FatherProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MotherProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Gender" Relationship="SMSModel.FK_Student_Gender" FromRole="Student" ToRole="Gender" />
           <NavigationProperty Name="Grade" Relationship="SMSModel.FK_Student_Grade" FromRole="Student" ToRole="Grade" />
         </EntityType>
         <EntityType Name="User">
@@ -324,7 +326,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Staff" Relationship="SMSModel.FK_User_Staff" FromRole="User" ToRole="Staff" />
+          <Property Name="EMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserAccessRoles" Relationship="SMSModel.FK_UserAccessRole_User" FromRole="User" ToRole="UserAccessRole" />
         </EntityType>
         <EntityType Name="UserAccessRole">
@@ -361,15 +363,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Student_Gender">
+          <End Type="SMSModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="SMSModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Student_Grade">
           <End Type="SMSModel.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="SMSModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="SMSModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grade">
               <PropertyRef Name="GradeID" />
             </Principal>
             <Dependent Role="Student">
-              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="GradeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,18 +396,6 @@
             </Principal>
             <Dependent Role="Staff">
               <PropertyRef Name="SpecialtyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Staff">
-          <End Type="SMSModel.Staff" Role="Staff" Multiplicity="1" />
-          <End Type="SMSModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -482,7 +484,7 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="StudentName_en" ColumnName="StudentName_en" />
@@ -495,6 +497,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SMSModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

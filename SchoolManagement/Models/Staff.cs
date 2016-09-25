@@ -14,12 +14,6 @@ namespace SchoolManagement.Models
     
     public partial class Staff
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Staff()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public int EmployeeID { get; set; }
         public string FirstName_ar { get; set; }
         public string FirstName_en { get; set; }
@@ -36,7 +30,5 @@ namespace SchoolManagement.Models
     
         public virtual Gender Gender { get; set; }
         public virtual Specialty Specialty { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

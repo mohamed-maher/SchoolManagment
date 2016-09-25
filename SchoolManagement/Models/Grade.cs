@@ -14,10 +14,17 @@ namespace SchoolManagement.Models
     
     public partial class Grade
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Grade()
+        {
+            this.Students = new HashSet<Student>();
+        }
+    
         public int GradeID { get; set; }
         public string GradeName_ar { get; set; }
         public string GradeName_en { get; set; }
     
-        public virtual Student Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student> Students { get; set; }
     }
 }
