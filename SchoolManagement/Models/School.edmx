@@ -29,6 +29,15 @@
           <Property Name="GradeName_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GradeName_en" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="GradeSub">
+          <Key>
+            <PropertyRef Name="GradeSubID" />
+          </Key>
+          <Property Name="GradeSubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectsID" Type="int" Nullable="false" />
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Specialty">
           <Key>
             <PropertyRef Name="SpecialtyID" />
@@ -64,7 +73,7 @@
           <Property Name="StudentName_ar" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="StudentName_en" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-          <Property Name="PlaceOfBirth" Type="varchar" MaxLength="100" />
+          <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="100" />
           <Property Name="GenderID" Type="int" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="50" />
           <Property Name="MobilePhone" Type="varchar" MaxLength="50" />
@@ -75,6 +84,14 @@
           <Property Name="MotherName_en" Type="nvarchar" MaxLength="50" />
           <Property Name="FatherProfession" Type="nvarchar" MaxLength="50" />
           <Property Name="MotherProfession" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="SubjectsID" />
+          </Key>
+          <Property Name="SubjectsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subjects_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subjects_en" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -94,6 +111,42 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="AccessRoleID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_GradeSub_Grade">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="1" />
+          <End Role="GradeSub" Type="Self.GradeSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="GradeSub">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeSub_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="GradeSub" Type="Self.GradeSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="GradeSub">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeSub_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="GradeSub" Type="Self.GradeSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectsID" />
+            </Principal>
+            <Dependent Role="GradeSub">
+              <PropertyRef Name="SubjectsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Staff_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
@@ -170,11 +223,25 @@
           <EntitySet Name="AccessRole" EntityType="Self.AccessRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradeSub" EntityType="Self.GradeSub" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Specialty" EntityType="Self.Specialty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccessRole" EntityType="Self.UserAccessRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GradeSub_Grade" Association="Self.FK_GradeSub_Grade">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="GradeSub" EntitySet="GradeSub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeSub_Staff" Association="Self.FK_GradeSub_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="GradeSub" EntitySet="GradeSub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeSub_Subjects" Association="Self.FK_GradeSub_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="GradeSub" EntitySet="GradeSub" />
+          </AssociationSet>
           <AssociationSet Name="FK_Staff_Gender" Association="Self.FK_Staff_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Staff" EntitySet="Staff" />
@@ -208,9 +275,11 @@
           <EntitySet Name="AccessRoles" EntityType="SMSModel.AccessRole" />
           <EntitySet Name="Genders" EntityType="SMSModel.Gender" />
           <EntitySet Name="Grades" EntityType="SMSModel.Grade" />
+          <EntitySet Name="GradeSubs" EntityType="SMSModel.GradeSub" />
           <EntitySet Name="Specialties" EntityType="SMSModel.Specialty" />
           <EntitySet Name="Staffs" EntityType="SMSModel.Staff" />
           <EntitySet Name="Students" EntityType="SMSModel.Student" />
+          <EntitySet Name="Subjects" EntityType="SMSModel.Subject" />
           <EntitySet Name="Users" EntityType="SMSModel.User" />
           <EntitySet Name="UserAccessRoles" EntityType="SMSModel.UserAccessRole" />
           <AssociationSet Name="FK_UserAccessRole_AccessRole" Association="SMSModel.FK_UserAccessRole_AccessRole">
@@ -225,9 +294,21 @@
             <End Role="Gender" EntitySet="Genders" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
+          <AssociationSet Name="FK_GradeSub_Grade" Association="SMSModel.FK_GradeSub_Grade">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="GradeSub" EntitySet="GradeSubs" />
+          </AssociationSet>
           <AssociationSet Name="FK_Student_Grade" Association="SMSModel.FK_Student_Grade">
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeSub_Staff" Association="SMSModel.FK_GradeSub_Staff">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="GradeSub" EntitySet="GradeSubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeSub_Subjects" Association="SMSModel.FK_GradeSub_Subjects">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="GradeSub" EntitySet="GradeSubs" />
           </AssociationSet>
           <AssociationSet Name="FK_Staff_Specialty" Association="SMSModel.FK_Staff_Specialty">
             <End Role="Specialty" EntitySet="Specialties" />
@@ -264,7 +345,20 @@
           <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GradeName_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GradeName_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GradeSubs" Relationship="SMSModel.FK_GradeSub_Grade" FromRole="Grade" ToRole="GradeSub" />
           <NavigationProperty Name="Students" Relationship="SMSModel.FK_Student_Grade" FromRole="Grade" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="GradeSub">
+          <Key>
+            <PropertyRef Name="GradeSubID" />
+          </Key>
+          <Property Name="GradeSubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectsID" Type="Int32" Nullable="false" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grade" Relationship="SMSModel.FK_GradeSub_Grade" FromRole="GradeSub" ToRole="Grade" />
+          <NavigationProperty Name="Staff" Relationship="SMSModel.FK_GradeSub_Staff" FromRole="GradeSub" ToRole="Staff" />
+          <NavigationProperty Name="Subject" Relationship="SMSModel.FK_GradeSub_Subjects" FromRole="GradeSub" ToRole="Subject" />
         </EntityType>
         <EntityType Name="Specialty">
           <Key>
@@ -293,6 +387,7 @@
           <Property Name="YearsOfService" Type="Int32" />
           <Property Name="SpecialtyID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Gender" Relationship="SMSModel.FK_Staff_Gender" FromRole="Staff" ToRole="Gender" />
+          <NavigationProperty Name="GradeSubs" Relationship="SMSModel.FK_GradeSub_Staff" FromRole="Staff" ToRole="GradeSub" />
           <NavigationProperty Name="Specialty" Relationship="SMSModel.FK_Staff_Specialty" FromRole="Staff" ToRole="Specialty" />
         </EntityType>
         <EntityType Name="Student">
@@ -304,7 +399,7 @@
           <Property Name="StudentName_ar" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="StudentName_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PlaceOfBirth" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PlaceOfBirth" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="GenderID" Type="Int32" Nullable="false" />
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -317,6 +412,15 @@
           <Property Name="MotherProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Gender" Relationship="SMSModel.FK_Student_Gender" FromRole="Student" ToRole="Gender" />
           <NavigationProperty Name="Grade" Relationship="SMSModel.FK_Student_Grade" FromRole="Student" ToRole="Grade" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectsID" />
+          </Key>
+          <Property Name="SubjectsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subjects_ar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subjects_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GradeSubs" Relationship="SMSModel.FK_GradeSub_Subjects" FromRole="Subject" ToRole="GradeSub" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -375,6 +479,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GradeSub_Grade">
+          <End Type="SMSModel.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="SMSModel.GradeSub" Role="GradeSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="GradeSub">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Student_Grade">
           <End Type="SMSModel.Grade" Role="Grade" Multiplicity="1" />
           <End Type="SMSModel.Student" Role="Student" Multiplicity="*" />
@@ -384,6 +500,30 @@
             </Principal>
             <Dependent Role="Student">
               <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeSub_Staff">
+          <End Type="SMSModel.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="SMSModel.GradeSub" Role="GradeSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="GradeSub">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeSub_Subjects">
+          <End Type="SMSModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="SMSModel.GradeSub" Role="GradeSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectsID" />
+            </Principal>
+            <Dependent Role="GradeSub">
+              <PropertyRef Name="SubjectsID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -444,6 +584,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GradeSubs">
+            <EntityTypeMapping TypeName="SMSModel.GradeSub">
+              <MappingFragment StoreEntitySet="GradeSub">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="SubjectsID" ColumnName="SubjectsID" />
+                <ScalarProperty Name="GradeSubID" ColumnName="GradeSubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Specialties">
             <EntityTypeMapping TypeName="SMSModel.Specialty">
               <MappingFragment StoreEntitySet="Specialty">
@@ -491,6 +641,15 @@
                 <ScalarProperty Name="StudentName_ar" ColumnName="StudentName_ar" />
                 <ScalarProperty Name="GradeID" ColumnName="GradeID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="SMSModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Subjects_en" ColumnName="Subjects_en" />
+                <ScalarProperty Name="Subjects_ar" ColumnName="Subjects_ar" />
+                <ScalarProperty Name="SubjectsID" ColumnName="SubjectsID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -447,6 +447,7 @@
     <Compile Include="Controllers\SpecialtyController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -464,6 +465,9 @@
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grade.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GradeSub.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -492,6 +496,10 @@
     <Compile Include="Models\Student.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubjectModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
@@ -2155,6 +2163,8 @@
     <Content Include="Views\Shared\EditorTemplates\FileAndImageBrowser.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Grade\Index.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Subject\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

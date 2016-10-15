@@ -28,9 +28,11 @@ namespace SchoolManagement.Models
         public virtual DbSet<AccessRole> AccessRoles { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
+        public virtual DbSet<GradeSub> GradeSubs { get; set; }
         public virtual DbSet<Specialty> Specialties { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserAccessRole> UserAccessRoles { get; set; }
     }
