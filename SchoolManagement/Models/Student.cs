@@ -20,7 +20,7 @@ namespace SchoolManagement.Models
         public string StudentName_en { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }
-        public Nullable<int> SexID { get; set; }
+        public int GenderID { get; set; }
         public string Telephone { get; set; }
         public string MobilePhone { get; set; }
         public string Address { get; set; }
@@ -31,6 +31,7 @@ namespace SchoolManagement.Models
         public string FatherProfession { get; set; }
         public string MotherProfession { get; set; }
     
+        public virtual Gender Gender { get; set; }
         public virtual Grade Grade { get; set; }
     }
 }

@@ -439,12 +439,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\SpecialtyController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -461,6 +465,9 @@
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grade.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GradeSub.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -489,12 +496,17 @@
     <Compile Include="Models\Student.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubjectModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserAccessRole.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\General.ar.Designer.cs">
       <DependentUpon>General.ar.resx</DependentUpon>
@@ -857,7 +869,6 @@
     <Content Include="css\components.css" />
     <Content Include="css\custom-rtl.css" />
     <Content Include="css\custom.css" />
-    <Content Include="css\grid.css" />
     <Content Include="css\layout-rtl.css" />
     <Content Include="css\layout.css" />
     <Content Include="css\login-rtl.css" />
@@ -2146,9 +2157,18 @@
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RequiredString.cshtml" />
     <Content Include="Views\Specialty\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ComboBox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FileAndImageBrowser.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Grade\Index.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Subject\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Gender\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

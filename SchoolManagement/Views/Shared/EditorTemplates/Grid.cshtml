@@ -20,7 +20,7 @@
 .DataSource(datasource => datasource
         .Ajax()
     //.ServerOperation(false)
-    .Read(read => read.Action("Staffs_Read", "Staff"))
+    .Read(read => read.Action("Staffs_Read", "Staff", new { name = "test", id = 2 }))
     .Create(create => create.Action("Staffs_Create", "Staff"))
     .Update(update => update.Action("Staffs_Update", "Staff"))
     .Destroy(delete => delete.Action("Staffs_Destroy", "Staff"))

@@ -1,0 +1,75 @@
+﻿@using SchoolManagement.Resources;
+@using SchoolManagement.Models;
+@model IEnumerable<Student>
+
+@(Html.Kendo().Grid<Student>().Name("grid").Columns(column =>
+{
+    column.Bound(model => model.StudentID);
+    column.Bound(model => model.StudentName_ar).Title("Student Name(AR)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.StudentName_en).Title("Student Name(EN)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.FatherName_ar).Title("Father Name(AR)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.FatherName_en).Title("Father Name(EN)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.MotherName_ar).Title("Mother Name(AR)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.MotherName_en).Title("Mother Name(EN)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.DateOfBirth).Title("Date Of Birth").Format("{0:dd/MM/yyyy}").EditorTemplateName("Date").Width(120);
+    column.Bound(model => model.PlaceOfBirth ).Title("Place Of Birth").Width(120);
+    column.Bound(model => model.Address).Width(120);
+    column.Bound(model => model.Telephone).Width(120);
+    column.Bound(model => model.MobilePhone).Title("Mobile").Width(120);
+    column.Bound(model => model.FatherProfession).Title("Father Profession").Width(120);
+    column.Bound(model => model.MotherProfession).Title("Mother Profession").Width(120);
+    column.ForeignKey(p => p.GenderID, (System.Collections.IEnumerable)ViewData["Gender"], "GenderID", "GenderType_ar").Title("Gender").Width(120);
+    column.ForeignKey(p => p.GradeID, (System.Collections.IEnumerable)ViewData["Grade"], "GradeID", "GradeName_ar").Title("Grade").Width(120);
+    column.Command(command =>
+    {
+        command.Edit();
+        command.Destroy();
+    }).Title("Commands").Width(200);
+})
+.DataSource(datasource => datasource
+        .Ajax()
+    .Read(read => read.Action("Student_Read", "Student"))
+    .Create(create => create.Action("Student_Create", "Student"))
+    .Update(update => update.Action("Student_Update", "Student"))
+    .Destroy(delete => delete.Action("Student_Destroy", "Student"))
+    .PageSize(10)
+    .Model(model =>
+    {
+        model.Id(m => m.StudentID);
+        model.Field(m => m.StudentID).Editable(false);
+    })
+)
+.Groupable()
+.Sortable()
+.Filterable()
+.Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+)
+.Scrollable()
+.Resizable(resize => resize.Columns(true))
+.Editable(ed => ed.Mode(GridEditMode.InLine))
+.ToolBar(toolBar =>
+{
+    toolBar.Create();
+    toolBar.Pdf();
+    toolBar.Excel();
+})
+.Pdf(pdf => pdf
+    .AllPages()
+    .AvoidLinks()
+    .PaperSize("A4")
+    .Scale(0.8)
+    .Margin("2cm", "1cm", "1cm", "1cm")
+    .Landscape()
+    .RepeatHeaders()
+    .TemplateId("page-template")
+    .FileName("Student.pdf")
+.ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
+)
+.Excel(excel => excel
+    .FileName("Student.xlsx")
+    .Filterable(true)
+    .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+)
+)

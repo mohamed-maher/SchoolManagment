@@ -1,0 +1,116 @@
+﻿@using SchoolManagement.Resources;
+@using SchoolManagement.Models;
+@model Subject
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SubjectsID, htmlAttributes: new { @id = "SubjectsID" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Subjects_ar, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.Kendo().TextBoxFor(model => model.Subjects_ar).HtmlAttributes(new { @id = "Subjects_ar" }))
+            @Html.ValidationMessageFor(model => model.Subjects_ar, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Subjects_en, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.Kendo().TextBoxFor(model => model.Subjects_en).HtmlAttributes(new { @id = "Subjects_en" }))
+            @Html.ValidationMessageFor(model => model.Subjects_en, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" onclick="Save()" />
+        </div>
+    </div>
+</div>
+@(Html.Kendo().Grid<SubjectModel>().Name("grid").Columns(column =>
+{
+    column.ForeignKey(p => p.GradeID, (System.Collections.IEnumerable)ViewData["Grade"], "GradeID", "GradeName_ar").Title("Grade").Width(120);
+    column.Bound(model => model.Employees).Title("Employees").ClientTemplate("#= renderMultiSelectText(data.Employees) #").EditorTemplateName("MultiSelect").Width(120);
+    column.Command(command =>
+    {
+        command.Edit();
+        command.Destroy();
+    }).Title("Commands").Width(200);
+})
+.DataSource(datasource => datasource
+        .Ajax()
+    .Read(read => read.Action("SubjectsDet_Read", "Subject").Data("Data"))
+    .Create(create => create.Action("SubjectsDet_Create", "Subject").Data("Data"))
+    .Update(update => update.Action("SubjectsDet_Update", "Subject").Data("Data"))
+    .Destroy(delete => delete.Action("SubjectsDet_Destroy", "Subject").Data("Data"))
+    .PageSize(10)
+    .Model(model =>
+    {
+        model.Id(m => m.SubjectsID);
+        model.Field(m => m.SubjectsID).Editable(false);
+    })
+)
+.Groupable()
+.Sortable()
+.Filterable()
+.Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+)
+.Scrollable()
+.Resizable(resize => resize.Columns(true))
+.Editable(ed => ed.Mode(GridEditMode.InLine))
+.ToolBar(toolBar =>
+{
+    toolBar.Create();
+    toolBar.Pdf();
+    toolBar.Excel();
+})
+.Pdf(pdf => pdf
+    .AllPages()
+    .AvoidLinks()
+    .PaperSize("A4")
+    .Scale(0.8)
+    .Margin("2cm", "1cm", "1cm", "1cm")
+    .Landscape()
+    .RepeatHeaders()
+    .TemplateId("page-template")
+    .FileName("Subject.pdf")
+.ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
+)
+.Excel(excel => excel
+    .FileName("Subject.xlsx")
+    .Filterable(true)
+    .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+)
+)
+<script type="text/javascript">
+    function Save() {
+        $.ajax({
+            url: "/Subject/Create",
+            type: "Post",
+            data: { SubjectID: $("#SubjectsID").val(), Subjects_ar: $("#Subjects_ar").val(), Subjects_en: $("#Subjects_en").val() },
+            success: function (data) {
+                $("#SubjectsID").val(data.SubjectsID)
+            }, error: function (ex) { }
+        });
+    }
+    function Data() {
+        return {
+            SubjectID: $("#SubjectsID").val()
+        };
+    }
+    function renderMultiSelectText(selectListArray) {
+        if (selectListArray != undefined && selectListArray[0] != undefined) {
+            var displayText;
+            $.each(selectListArray, function (index) {
+                var Name = selectListArray[index].Name == undefined ? selectListArray[index].FirstName_ar + ' ' + selectListArray[index].LastName_ar : selectListArray[index].Name;
+                if (displayText == undefined)
+                    displayText = Name + ', ';
+                else
+                    displayText = displayText + Name + ', ';
+            });
+            return displayText.slice(0, -2);
+        }
+        else
+            return "";
+    }
+</script>

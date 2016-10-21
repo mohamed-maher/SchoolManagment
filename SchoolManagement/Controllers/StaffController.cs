@@ -35,7 +35,7 @@ namespace SchoolManagement.Controllers
                 db.Staffs.Add(staff);
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(new { Data = staff });
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult Staffs_Update([DataSourceRequest]DataSourceRequest request, Staff staff)

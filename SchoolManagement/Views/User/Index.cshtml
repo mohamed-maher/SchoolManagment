@@ -1,0 +1,50 @@
+﻿@using SchoolManagement.Resources;
+@using SchoolManagement.Models;
+@model IEnumerable<User>
+@{
+    ViewBag.Title = "Index";
+}
+
+@(Html.Kendo().Grid(Model).Name("grid").Columns(column =>
+{
+    column.Bound(model => model.Staff.FirstName_en).Title("Employee Name").Width(120);
+    column.Bound(model => model.UserName).Title("User Name").Width(120);
+    column.Bound(model => model.EMail).Title("EMail").Width(120);
+})
+.DataSource(datasource => datasource
+    .Ajax()
+    .ServerOperation(false)
+    .PageSize(10)
+)
+.Groupable()
+.Sortable()
+.Filterable()
+.Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+)
+.Scrollable()
+.Resizable(resize => resize.Columns(true))
+.ToolBar(toolBar =>
+{
+    toolBar.Pdf();
+    toolBar.Excel();
+})
+.Pdf(pdf => pdf
+    .AllPages()
+    .AvoidLinks()
+    .PaperSize("A4")
+    .Scale(0.8)
+    .Margin("2cm", "1cm", "1cm", "1cm")
+    .Landscape()
+    .RepeatHeaders()
+    .TemplateId("page-template")
+    .FileName("Users.pdf")
+.ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
+)
+.Excel(excel => excel
+    .FileName("Users.xlsx")
+    .Filterable(true)
+    .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
+)
+)

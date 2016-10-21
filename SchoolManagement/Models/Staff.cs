@@ -17,7 +17,7 @@ namespace SchoolManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Staff()
         {
-            this.Users = new HashSet<User>();
+            this.GradeSubs = new HashSet<GradeSub>();
         }
     
         public int EmployeeID { get; set; }
@@ -35,8 +35,8 @@ namespace SchoolManagement.Models
         public int SpecialtyID { get; set; }
     
         public virtual Gender Gender { get; set; }
-        public virtual Specialty Specialty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<GradeSub> GradeSubs { get; set; }
+        public virtual Specialty Specialty { get; set; }
     }
 }

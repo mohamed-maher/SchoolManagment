@@ -4,6 +4,7 @@
 
 @(Html.Kendo().Grid<Staff>().Name("grid").Columns(column =>
 {
+    column.Bound(model => model.EmployeeID).Hidden();
     column.Bound(model => model.FirstName_ar).Title("First Name(AR)").EditorTemplateName("RequiredString").Width(120);
     column.Bound(model => model.FirstName_en).Title("First Name(EN)").EditorTemplateName("RequiredString").Width(120);
     column.Bound(model => model.LastName_ar).Title("Last Name(AR)").EditorTemplateName("RequiredString").Width(120);

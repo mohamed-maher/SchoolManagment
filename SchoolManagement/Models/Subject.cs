@@ -12,22 +12,19 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class Subject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Grade()
+        public Subject()
         {
             this.GradeSubs = new HashSet<GradeSub>();
-            this.Students = new HashSet<Student>();
         }
     
-        public int GradeID { get; set; }
-        public string GradeName_ar { get; set; }
-        public string GradeName_en { get; set; }
+        public int SubjectsID { get; set; }
+        public string Subjects_ar { get; set; }
+        public string Subjects_en { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GradeSub> GradeSubs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
     }
 }

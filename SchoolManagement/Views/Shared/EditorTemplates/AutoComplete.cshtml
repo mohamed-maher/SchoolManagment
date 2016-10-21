@@ -1,2 +1,3 @@
-﻿@Html.Kendo().AutoComplete().Name("KAutoComplete").Placeholder("....").BindTo(@Model)
+﻿@(Html.Kendo().AutoComplete().Name("KAutoComplete").Placeholder("....").BindTo(@Model)
       .HtmlAttributes(new { placeholder = "Full name", required = "required", validationmessage = "Enter {0}", style = "width:220px" })
+)

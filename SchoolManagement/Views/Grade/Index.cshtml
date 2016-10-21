@@ -1,12 +1,12 @@
 ﻿@using SchoolManagement.Resources;
 @using SchoolManagement.Models;
-@model IEnumerable<Specialty>
+@model IEnumerable<Grade>
 
-@(Html.Kendo().Grid<Specialty>().Name("KGrid").Columns(column =>
+@(Html.Kendo().Grid<Grade>().Name("grid").Columns(column =>
 {
-    column.Bound(model => model.SpecialtyID).Hidden();
-    column.Bound(model => model.Specialty_ar).Title("Specialty(AR)").EditorTemplateName("RequiredString");
-    column.Bound(model => model.Specialty_en).Title("Specialty(EN)").EditorTemplateName("RequiredString");
+    column.Bound(model => model.GradeID).Hidden();
+    column.Bound(model => model.GradeName_ar).Title("Grade Name(AR)").EditorTemplateName("RequiredString").Width(120);
+    column.Bound(model => model.GradeName_en).Title("Grade Name(EN)").EditorTemplateName("RequiredString").Width(120);
     column.Command(command =>
     {
         command.Edit();
@@ -15,21 +15,25 @@
 })
 .DataSource(datasource => datasource
         .Ajax()
-    .Read(read => read.Action("Specialty_Read", "Specialty"))
-    .Create(create => create.Action("Specialty_Create", "Specialty"))
-    .Update(update => update.Action("Specialty_Update", "Specialty"))
-    .Destroy(delete => delete.Action("Specialty_Destroy", "Specialty"))
+    .Read(read => read.Action("Grade_Read", "Grade"))
+    .Create(create => create.Action("Grade_Create", "Grade"))
+    .Update(update => update.Action("Grade_Update", "Grade"))
+    .Destroy(delete => delete.Action("Grade_Destroy", "Grade"))
     .PageSize(10)
     .Model(model =>
     {
-        model.Id(m => m.SpecialtyID);
-        model.Field(m => m.SpecialtyID).Editable(false);
+        model.Id(m => m.GradeID);
+        model.Field(m => m.GradeID).Editable(false);
     })
 )
 .Groupable()
 .Sortable()
 .Filterable()
-.Pageable()
+.Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+)
+.Scrollable()
 .Resizable(resize => resize.Columns(true))
 .Editable(ed => ed.Mode(GridEditMode.InLine))
 .ToolBar(toolBar =>
@@ -47,11 +51,11 @@
     .Landscape()
     .RepeatHeaders()
     .TemplateId("page-template")
-    .FileName("Specialty.pdf")
+    .FileName("Grade.pdf")
 .ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
 )
 .Excel(excel => excel
-    .FileName("Specialty.xlsx")
+    .FileName("Grade.xlsx")
     .Filterable(true)
     .ProxyURL(Url.Action("Excel_Export_Save", "Grid"))
 )
