@@ -14,6 +14,7 @@ namespace SchoolManagement.Controllers
         SMSEntities db = new SMSEntities();
         public ActionResult Index()
         {
+            ViewBag.Error = "Error";
             return View();
         }
         public ActionResult Create(int? id)
