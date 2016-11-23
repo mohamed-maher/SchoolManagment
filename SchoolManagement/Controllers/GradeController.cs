@@ -34,7 +34,7 @@ namespace SchoolManagement.Controllers
             }
             return Json(new { Data = Grade });
         }
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(System.Web.Mvc.HttpVerbs.Post)]
         public JsonResult Grade_Update([DataSourceRequest]DataSourceRequest request, Grade Grade)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -45,7 +45,8 @@ namespace SchoolManagement.Controllers
                 db.Entry(Grade).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(ModelState.IsValid ? true : false);
         }
         public ActionResult Grade_Destroy([DataSourceRequest]DataSourceRequest request, Grade Grade)
         {
@@ -56,7 +57,8 @@ namespace SchoolManagement.Controllers
                 db.Grades.Remove(Grade);
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(ModelState.IsValid ? true : false);
         }
     }
 }

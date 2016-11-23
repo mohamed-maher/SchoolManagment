@@ -37,7 +37,7 @@ namespace SchoolManagement.Controllers
             }
             return Json(new { Data = staff });
         }
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(System.Web.Mvc.HttpVerbs.Post)]
         public JsonResult Staffs_Update([DataSourceRequest]DataSourceRequest request, Staff staff)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -48,7 +48,8 @@ namespace SchoolManagement.Controllers
                 db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(ModelState.IsValid ? true : false);
         }
         public ActionResult Staffs_Destroy([DataSourceRequest]DataSourceRequest request, Staff staff)
         {
@@ -59,7 +60,8 @@ namespace SchoolManagement.Controllers
                 db.Staffs.Remove(staff);
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(ModelState.IsValid ? true : false);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SchoolManagement.Controllers
 {
     public class HomeController : Controller
     {
-        SecurityEntities db = new SecurityEntities();
+        SMSEntities db = new SMSEntities();
 
         public ActionResult Index()
         {
@@ -44,9 +44,9 @@ namespace SchoolManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<tUser> n = db.tUsers.Where(u => u.UserName == loginData.UserName).ToList();
-                List<tUser> p = db.tUsers.Where(u => u.Password.ToString() == loginData.Password).ToList();
-                tUser user = db.tUsers.Single(u => u.UserName == loginData.UserName && u.Password.ToString() == loginData.Password);
+                List<User> n = db.Users.Where(u => u.UserName == loginData.UserName).ToList();
+                List<User> p = db.Users.Where(u => u.Password.ToString() == loginData.Password).ToList();
+                User user = db.Users.Single(u => u.UserName == loginData.UserName && u.Password.ToString() == loginData.Password);
                 if (user == null)
                 {
                     SessionPersister.UserName = string.Empty;

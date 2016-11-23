@@ -25,7 +25,7 @@ namespace SchoolManagement.Controllers
             DataSourceResult result = Student.ToDataSourceResult(request);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(System.Web.Mvc.HttpVerbs.Post)]
         public JsonResult Student_Create([DataSourceRequest]DataSourceRequest request, Student student)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -39,7 +39,7 @@ namespace SchoolManagement.Controllers
             return Json(new { Data = student });
             //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(System.Web.Mvc.HttpVerbs.Post)]
         public JsonResult Student_Update([DataSourceRequest]DataSourceRequest request, Student student)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -50,7 +50,8 @@ namespace SchoolManagement.Controllers
                 db.Entry(student).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(ModelState.IsValid ? true : false);
         }
         public ActionResult Student_Destroy([DataSourceRequest]DataSourceRequest request, Student student)
         {
@@ -61,7 +62,8 @@ namespace SchoolManagement.Controllers
                 db.Students.Remove(student);
                 db.SaveChanges();
             }
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(ModelState.IsValid ? true : false);
         }
     }
 }
