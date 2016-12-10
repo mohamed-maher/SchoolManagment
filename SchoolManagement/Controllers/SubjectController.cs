@@ -121,8 +121,7 @@ namespace SchoolManagement.Controllers
                     }
                 }
             }
-            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
-            return Json(ModelState.IsValid ? true : false);
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
         [AcceptVerbs(System.Web.Mvc.HttpVerbs.Post)]
         public JsonResult SubjectsDet_Update([DataSourceRequest]DataSourceRequest request, SubjectModel subject, string SubjectID)
@@ -162,8 +161,7 @@ namespace SchoolManagement.Controllers
                     db.SaveChanges();
                 }
             }
-            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
-            return Json(ModelState.IsValid ? true : false);
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
         public ActionResult SubjectsDet_Destroy([DataSourceRequest]DataSourceRequest request, SubjectModel subject, string SubjectID)
         {
@@ -182,8 +180,7 @@ namespace SchoolManagement.Controllers
                     db.SaveChanges();
                 }
             }
-            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
-            return Json(ModelState.IsValid ? true : false);
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
         public ActionResult Delete(string SubjectID)
         {
@@ -203,8 +200,7 @@ namespace SchoolManagement.Controllers
                 db.Subjects.Remove(s);
                 db.SaveChanges();
             }
-            //return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
-            return Json(ModelState.IsValid ? true : false);
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
     }
 }
